@@ -1,28 +1,30 @@
 import React from "react";
-import { View, StyleSheet, Button } from "react-native";
+import { Octicons } from "@expo/vector-icons";
+import {} from "@react-navigation/native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Button } from "react-native";
+import { ContainerButtons } from "./styles";
+import { NativeStackHeaderProps } from "@react-navigation/native-stack";
 
-export default function Home({ navigation }) {
+type NavigationProps = NativeStackHeaderProps & {};
+
+export default function Home({ navigation }: NavigationProps) {
   return (
-    <View style={styles.homeContainer}>
+    <>
+      <ContainerButtons>
+        <Octicons
+          name="three-bars"
+          size={26}
+          color="black"
+          style={{ marginRight: 15 }}
+        />
+        <MaterialCommunityIcons name="dots-grid" size={30} color="black" />
+      </ContainerButtons>
+
       <Button
         title="Navigate"
         onPress={() => navigation.navigate("DetailMovie")}
       />
-    </View>
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  homeContainer: {
-    alignItems: "center",
-  },
-  text: {
-    fontFamily: "Inter_900Black",
-  },
-  text1: {
-    fontFamily: "Inter_400Regular",
-  },
-  text2: {
-    fontFamily: "Inter_300Light",
-  },
-});

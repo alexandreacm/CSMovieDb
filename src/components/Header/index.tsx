@@ -2,7 +2,7 @@ import React from "react";
 import { StyledContainer, StyledImg } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "@expo/vector-icons/MaterialIcons";
-import icLogo from "../../assets/images/logo_imbd.jpeg";
+import icLogo from "../../assets/images/imdb_logo.png";
 import { View } from "react-native";
 
 type Props = {

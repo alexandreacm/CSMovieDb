@@ -1,5 +1,8 @@
 import styled, { css } from "styled-components/native";
-import { TitleType } from "../../screens/Home/styles";
+
+type TitleType = {
+    isFeatured: boolean
+}
 
 interface InputType {
     width?: number;
