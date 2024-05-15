@@ -1,8 +1,10 @@
 import React from "react";
 import { StatusBar } from "react-native";
-import { useGoogleFonts } from "./src/hooks/useGoogleFonts";
-import Home from "./src/screens/Home";
 import SafeAreaView from "./src/components/SafeAreaView";
+import { useGoogleFonts } from "./src/hooks/useGoogleFonts";
+import Navigation from "./src/navigation";
+import ThemeProvider from "./src/components/ThemeProvider";
+import theme from "./src/styles/theme/default-theme";
 
 export default function App() {
   const [fontsLoaded, fontError] = useGoogleFonts();
@@ -11,8 +13,13 @@ export default function App() {
 
   return (
     <SafeAreaView>
-      <StatusBar barStyle="dark-content" backgroundColor="#000" />
-      <Home />
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor={theme.COLORS.ui.PRIMARY}
+      />
+      <ThemeProvider>
+        <Navigation />
+      </ThemeProvider>
     </SafeAreaView>
   );
 }

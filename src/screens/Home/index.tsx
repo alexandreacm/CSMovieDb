@@ -1,26 +1,19 @@
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { View, StyleSheet, Button } from "react-native";
 
-export default function Home() {
+export default function Home({ navigation }) {
   return (
-    <View>
-      <Text style={styles.text}>
-        Open up App.js to start working on your app!
-      </Text>
-      <Text style={styles.text1}>
-        Open up App.js to start working on your app!
-      </Text>
-      <Text style={styles.text2}>
-        Open up App.js to start working on your app!
-      </Text>
+    <View style={styles.homeContainer}>
+      <Button
+        title="Navigate"
+        onPress={() => navigation.navigate("DetailMovie")}
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
+  homeContainer: {
     alignItems: "center",
   },
   text: {
