@@ -24,15 +24,26 @@ import {
   StyledSearchInput,
 } from "./styles";
 import theme from "../../styles/theme/default-theme";
-import { useGetMoviesQuery } from "../../services/api-movie";
+import {
+  useGetMoviesQuery,
+  useGetMovieByTitleQuery,
+} from "../../services/api-movie";
 import { IMovie } from "../../models";
 import { Loading } from "../../components/Loading";
 
 type NavigationProps = NativeStackHeaderProps & {};
 
 export default function Home({ navigation }: NavigationProps) {
-  const { data = [], isError, isLoading, error } = useGetMoviesQuery();
   const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState("");
+  // const { data = [], isError, isLoading, error } = useGetMoviesQuery();
+  const {
+    data = [],
+    isError,
+    isLoading,
+    isFetching,
+    error,
+  } = useGetMovieByTitleQuery(search);
 
   const renderItem = ({ item }: { item: IMovie }) => {
     return (
@@ -54,6 +65,15 @@ export default function Home({ navigation }: NavigationProps) {
       </TouchableOpacity>
     );
   };
+
+  function handleSearch() {
+    setSearch(filter);
+    setFilter("");
+  }
+
+  if (isLoading || isFetching) {
+    return <Loading />;
+  }
 
   return (
     <StyledHomeContainer>
@@ -83,8 +103,9 @@ export default function Home({ navigation }: NavigationProps) {
         <StyledInput>
           <StyledSearchInput
             placeholder="Search Imdb"
-            value={search}
-            onChangeText={setSearch}
+            value={filter}
+            onChangeText={setFilter}
+            onSubmitEditing={handleSearch}
           />
         </StyledInput>
         <StyledIcon>
@@ -92,7 +113,6 @@ export default function Home({ navigation }: NavigationProps) {
         </StyledIcon>
       </WrapperSearch>
 
-      {isLoading && <Loading />}
       {isError && (
         <StyledWrapperError>
           <Label fontSize={20}>
@@ -101,16 +121,14 @@ export default function Home({ navigation }: NavigationProps) {
         </StyledWrapperError>
       )}
 
-      {data && !isLoading && (
-        <FlatList
-          testID="flatList"
-          data={data?.Search}
-          numColumns={2}
-          keyExtractor={(item: IMovie) => item.imdbID}
-          renderItem={renderItem}
-          showsVerticalScrollIndicator={false}
-        />
-      )}
+      <FlatList
+        testID="flatList"
+        data={data?.Search}
+        numColumns={2}
+        keyExtractor={(item: IMovie) => item.imdbID}
+        renderItem={renderItem}
+        showsVerticalScrollIndicator={false}
+      />
     </StyledHomeContainer>
   );
 }

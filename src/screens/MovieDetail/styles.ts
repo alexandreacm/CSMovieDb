@@ -1,14 +1,14 @@
 import styled from 'styled-components/native';
 import { TextProps, ViewProps } from 'react-native';
 
-const StyledWrapper = styled.View<ViewProps>`
+const StyledScrollView = styled.ScrollView`
   flex: 1;
-  background-color: ${({ theme }) => theme.COLORS.ui.SECONDARY_900};;
+  background-color: ${({ theme }) => theme.COLORS.ui.SECONDARY_900};
 `;
 
 const StyledImage = styled.Image`
   width: 100%;
-  height: 50%;
+  height: 100%;
 `;
 
 const StyledContainer = styled.View`
@@ -20,14 +20,25 @@ const StyledContainer = styled.View`
   margin-top: 10px;
 `;
 
-
 const StyledText = styled.Text.attrs({
-    numberOfLines: 2
+  numberOfLines: 2
 }) <TextProps>`
   width:300px;
   color: ${({ theme }) => theme.COLORS.text.TITLE};
   font-size:  ${({ theme }) => theme.SIZES[1]};
 `;
 
+const StyledOverview = styled.Text <TextProps>`
+  width: 100%;
+  padding: 10px;
+  color: ${({ theme }) => theme.COLORS.text.BLACK};
+  font-size:  ${({ theme }) => theme.SIZES[1]};
+`;
 
-export { StyledWrapper, StyledImage, StyledContainer, StyledText }
+export {
+  StyledScrollView,
+  StyledImage,
+  StyledContainer,
+  StyledText,
+  StyledOverview
+}

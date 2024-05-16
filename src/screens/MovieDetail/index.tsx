@@ -3,10 +3,11 @@ import { NativeStackHeaderProps } from "@react-navigation/native-stack";
 import { useGetMovieByIdQuery } from "../../services/api-movie";
 import { Loading } from "../../components/Loading";
 import {
-  StyledWrapper,
+  StyledScrollView,
   StyledImage,
   StyledContainer,
   StyledText,
+  StyledOverview,
 } from "./styles";
 import { Label } from "../../components/Label";
 import { useTheme } from "styled-components/native";
@@ -25,16 +26,21 @@ export default function MovieDetail({ route }: Props) {
   const { COLORS } = useTheme();
 
   return (
-    <StyledWrapper>
+    <>
       {isLoading ? (
         <Loading />
       ) : (
-        <>
+        <StyledScrollView>
           <StyledImage source={{ uri: data?.Poster }} />
 
-          <Label fontSize={20} isBold style={{ marginTop: 10, padding: 8 }}>
+          <Label fontSize={20} isBold style={{ marginTop: 10, padding: 10 }}>
             {data?.Title} - {data?.Year}
           </Label>
+
+          <Label fontSize={18} isBold style={{ marginTop: 10, padding: 8 }}>
+            Overview:
+          </Label>
+          <StyledOverview>{data?.Plot}</StyledOverview>
 
           <StyledContainer>
             <Label style={{ marginRight: 10 }} fontSize={15} isBold>
@@ -56,8 +62,8 @@ export default function MovieDetail({ route }: Props) {
             </Label>
             <StyledText>{data?.Actors}</StyledText>
           </StyledContainer>
-        </>
+        </StyledScrollView>
       )}
-    </StyledWrapper>
+    </>
   );
 }
