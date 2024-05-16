@@ -17,7 +17,7 @@ export default {
             BLACK: '#000',
             ERROR: '#D0421B',
             SUCCESS: '#138000',
-            TITLE: "#0C8CE9",
+            TITLE: "#0e63be;",
         },
     },
     FONTS: {

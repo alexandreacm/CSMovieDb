@@ -1,5 +1,5 @@
 import { ViewProps } from 'react-native';
-import { styled } from 'styled-components/native';
+import styled from 'styled-components/native';
 
 const StyledHomeContainer = styled.View<ViewProps>`
   flex: 1;
@@ -51,11 +51,45 @@ const StyledWrapperError = styled.View<ViewProps>`
   align-items: center;
 `;
 
+const WrapperSearch = styled.View<ViewProps>`
+  width: 100%;
+  flex-direction: row;
+  border-radius: 10px;
+  border-width: 1px;
+  border-color: #c3c0c0;
+  margin-top: 10px;
+  margin-bottom: 10px;
+`;
+
+const StyledInput = styled.View<ViewProps>`
+  width: 85%;
+  padding: 8px;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledIcon = styled.View<ViewProps>`
+  width: 15%;
+  padding:8px;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledSearchInput = styled.TextInput`
+  width: 100%;
+  padding: 8px;
+  text-align: left;
+`;
+
 export {
   StyledHomeContainer,
   WrapperButtons,
   WrapperFilter,
   WrapperViewGrid,
   StyledRoundedView,
-  StyledWrapperError
+  StyledWrapperError,
+  WrapperSearch,
+  StyledInput,
+  StyledIcon,
+  StyledSearchInput
 }

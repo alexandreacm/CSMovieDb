@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   TouchableOpacity,
   FlatList,
@@ -9,6 +9,7 @@ import {
 import { Octicons } from "@expo/vector-icons";
 import { NativeStackHeaderProps } from "@react-navigation/native-stack";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { EvilIcons } from "@expo/vector-icons";
 import { Label } from "../../components/Label";
 import {
   WrapperButtons,
@@ -17,6 +18,10 @@ import {
   StyledHomeContainer,
   StyledRoundedView,
   StyledWrapperError,
+  WrapperSearch,
+  StyledInput,
+  StyledIcon,
+  StyledSearchInput,
 } from "./styles";
 import theme from "../../styles/theme/default-theme";
 import { useGetMoviesQuery } from "../../services/api-movie";
@@ -27,12 +32,13 @@ type NavigationProps = NativeStackHeaderProps & {};
 
 export default function Home({ navigation }: NavigationProps) {
   const { data = [], isError, isLoading, error } = useGetMoviesQuery();
+  const [search, setSearch] = useState("");
 
   const renderItem = ({ item }: { item: IMovie }) => {
     return (
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate("DetailMovie", { id: item?.imdbID });
+          navigation.navigate("MovieDetail", { id: item?.imdbID });
         }}
       >
         <View
@@ -72,6 +78,19 @@ export default function Home({ navigation }: NavigationProps) {
           <Octicons name="three-bars" size={26} color="black" />
         </WrapperViewGrid>
       </WrapperButtons>
+
+      <WrapperSearch>
+        <StyledInput>
+          <StyledSearchInput
+            placeholder="Search Imdb"
+            value={search}
+            onChangeText={setSearch}
+          />
+        </StyledInput>
+        <StyledIcon>
+          <EvilIcons name="search" size={30} color="black" />
+        </StyledIcon>
+      </WrapperSearch>
 
       {isLoading && <Loading />}
       {isError && (
