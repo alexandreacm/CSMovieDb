@@ -35,10 +35,19 @@ const StyledOverview = styled.Text <TextProps>`
   font-size:  ${({ theme }) => theme.SIZES[1]};
 `;
 
+const StyledTitle = styled.Text<TextProps>`
+  width: 100%;
+  padding: 10px;
+  color: ${({ theme }) => theme.COLORS.text.BLACK};
+  font-size:  25px;
+  font-weight: bold;
+`;
+
 export {
   StyledScrollView,
   StyledImage,
   StyledContainer,
   StyledText,
-  StyledOverview
+  StyledOverview,
+  StyledTitle
 }

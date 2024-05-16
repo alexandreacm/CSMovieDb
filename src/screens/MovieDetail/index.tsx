@@ -8,9 +8,11 @@ import {
   StyledContainer,
   StyledText,
   StyledOverview,
+  StyledTitle,
 } from "./styles";
 import { Label } from "../../components/Label";
 import { useTheme } from "styled-components/native";
+import Genre from "../../components/Genre";
 
 type Props = NativeStackHeaderProps & {
   route: {
@@ -33,9 +35,11 @@ export default function MovieDetail({ route }: Props) {
         <StyledScrollView>
           <StyledImage source={{ uri: data?.Poster }} />
 
-          <Label fontSize={20} isBold style={{ marginTop: 10, padding: 10 }}>
-            {data?.Title} - {data?.Year}
-          </Label>
+          <StyledTitle>
+            {data?.Title} - ({data?.Year})
+          </StyledTitle>
+
+          <Genre genre={data?.Genre} />
 
           <Label fontSize={18} isBold style={{ marginTop: 10, padding: 8 }}>
             Overview:
@@ -61,6 +65,12 @@ export default function MovieDetail({ route }: Props) {
               Actors:
             </Label>
             <StyledText>{data?.Actors}</StyledText>
+          </StyledContainer>
+          <StyledContainer>
+            <Label style={{ marginRight: 10 }} fontSize={15} isBold>
+              Language:
+            </Label>
+            <StyledText>{data?.Language}</StyledText>
           </StyledContainer>
         </StyledScrollView>
       )}
