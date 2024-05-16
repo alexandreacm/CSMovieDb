@@ -1,21 +1,25 @@
 import React from "react";
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StatusBar } from "react-native";
+import SafeAreaView from "./src/components/SafeAreaView";
+import { useGoogleFonts } from "./src/hooks/useGoogleFonts";
+import Navigation from "./src/navigation";
+import ThemeProvider from "./src/components/ThemeProvider";
+import theme from "./src/styles/theme/default-theme";
 
 export default function App() {
+  const [fontsLoaded, fontError] = useGoogleFonts();
+
+  if (!fontsLoaded && !fontError) return null;
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView>
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor={theme.COLORS.ui.PRIMARY}
+      />
+      <ThemeProvider>
+        <Navigation />
+      </ThemeProvider>
+    </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
