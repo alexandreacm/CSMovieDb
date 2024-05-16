@@ -3,7 +3,8 @@ import { styled } from 'styled-components/native';
 
 const StyledHomeContainer = styled.View<ViewProps>`
   flex: 1;
-  padding: 10px;
+  padding: 8px;
+  background-color: ${({ theme }) => theme.COLORS.ui.SECONDARY_900};;
 `;
 
 const WrapperButtons = styled.View<ViewProps>`
@@ -28,15 +29,24 @@ const WrapperViewGrid = styled.View<ViewProps>`
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
-
 `;
 
 const StyledRoundedView = styled.View<ViewProps>`
-  width: 40px;
-  height: 40px;
+  width: 56px;
+  height: 35px;
   padding: 5px;
   border-radius: 10px;
   background-color: ${({ theme }) => theme.COLORS.ui.PRIMARY_500};
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledWrapperError = styled.View<ViewProps>`
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  opacity: 0.9;
+  background-color: ${({ theme }) => theme.COLORS.ui.PRIMARY_600};
   justify-content: center;
   align-items: center;
 `;
@@ -46,5 +56,6 @@ export {
   WrapperButtons,
   WrapperFilter,
   WrapperViewGrid,
-  StyledRoundedView
+  StyledRoundedView,
+  StyledWrapperError
 }

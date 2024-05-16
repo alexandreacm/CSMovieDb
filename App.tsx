@@ -5,6 +5,8 @@ import { useGoogleFonts } from "./src/hooks/useGoogleFonts";
 import Navigation from "./src/navigation";
 import ThemeProvider from "./src/components/ThemeProvider";
 import theme from "./src/styles/theme/default-theme";
+import { Provider } from "react-redux";
+import { store } from "./src/store";
 
 export default function App() {
   const [fontsLoaded, fontError] = useGoogleFonts();
@@ -12,14 +14,18 @@ export default function App() {
   if (!fontsLoaded && !fontError) return null;
 
   return (
-    <SafeAreaView>
+    <>
       <StatusBar
         barStyle="dark-content"
         backgroundColor={theme.COLORS.ui.PRIMARY}
       />
-      <ThemeProvider>
-        <Navigation />
-      </ThemeProvider>
-    </SafeAreaView>
+      <SafeAreaView>
+        <ThemeProvider>
+          <Provider store={store}>
+            <Navigation />
+          </Provider>
+        </ThemeProvider>
+      </SafeAreaView>
+    </>
   );
 }
