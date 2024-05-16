@@ -1,10 +1,10 @@
 import React from "react";
 import { View, Text } from "react-native";
 
-export default function DetailMovie() {
+export default function MovieDetail() {
   return (
     <View>
-      <Text>DetailMovie</Text>
+      <Text>MovieDetail</Text>
     </View>
   );
 }

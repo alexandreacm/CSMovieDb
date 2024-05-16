@@ -1,19 +1,11 @@
 import React from "react";
-import { Text, StyleSheet } from "react-native";
+import { StyledText } from "./styles";
 
 type Props = {
+  fontSize?: number | undefined;
   children: React.ReactNode;
 };
 
-export function Label({ children }: Props) {
-  return <Text style={styles.header}>{children}</Text>;
+export function Label({ fontSize, children }: Props) {
+  return <StyledText fontSize={fontSize}>{children}</StyledText>;
 }
-
-const styles = StyleSheet.create({
-  header: {
-    fontSize: 20,
-    marginBottom: 20,
-    fontWeight: "bold",
-    fontFamily: "montserrat-bold",
-  },
-});

@@ -1,7 +1,7 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "../screens/Home";
-import DetailMovie from "../screens/DetailMovie";
+import MovieDetail from "../screens/MovieDetail";
 import { useTheme } from "styled-components/native";
 import Header from "../components/Header";
 
@@ -21,8 +21,8 @@ const AppNavigator = () => {
           }}
         />
         <Stack.Screen
-          name="DetailMovie"
-          component={DetailMovie}
+          name="MovieDetail"
+          component={MovieDetail}
           options={{
             header: () => <Header isVisibleBackButton />,
             title: "",
