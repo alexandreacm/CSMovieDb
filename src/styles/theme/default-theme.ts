@@ -11,6 +11,7 @@ export default {
             PRIMARY_600: '#D0421B',
             SECONDARY_900: '#FFFFFF',
             SUCCESS: '#138000',
+            STAR: '#f6c30c'
         },
         text: {
             WHITE: '#FFFFFF',

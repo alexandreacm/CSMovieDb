@@ -13,6 +13,8 @@ import {
 import { Label } from "../../components/Label";
 import { useTheme } from "styled-components/native";
 import Genre from "../../components/Genre";
+import { View } from "react-native";
+import StarRating from "../../components/StarRating";
 
 type Props = NativeStackHeaderProps & {
   route: {
@@ -40,6 +42,8 @@ export default function MovieDetail({ route }: Props) {
           </StyledTitle>
 
           <Genre genre={data?.Genre} />
+
+          <StarRating average={data?.imdbRating} />
 
           <Label fontSize={18} isBold style={{ marginTop: 10, padding: 8 }}>
             Overview:
@@ -72,6 +76,7 @@ export default function MovieDetail({ route }: Props) {
             </Label>
             <StyledText>{data?.Language}</StyledText>
           </StyledContainer>
+          <StyledContainer />
         </StyledScrollView>
       )}
     </>

@@ -7,16 +7,16 @@ const StyledContainer = styled.View`
   flex-direction: row;
 `;
 
-const StyledCardGenre = styled.View`
+const StyledRoundedCard = styled.View`
   flex: 1;
   border-radius: 50%;
-  border-width: 1px;
+  border-width: 2px;
+  border-color: ${({ theme }) => theme.COLORS.ui.SECONDARY};
   justify-content: center;
   align-items: center;
   padding: 6px;
   margin-left: 4px;
   background-color: ${({ theme }) => theme.COLORS.ui.PRIMARY};
-  opacity: 0.6;
 `;
 
 const StyledText = styled.Text <TextProps>`
@@ -26,4 +26,4 @@ const StyledText = styled.Text <TextProps>`
 `;
 
 
-export { StyledContainer, StyledText, StyledCardGenre }
+export { StyledContainer, StyledText, StyledRoundedCard }

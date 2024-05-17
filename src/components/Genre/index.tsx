@@ -1,5 +1,5 @@
 import React from "react";
-import { StyledContainer, StyledCardGenre } from "./styles";
+import { StyledContainer, StyledRoundedCard } from "./styles";
 import { Label } from "../Label";
 import { useTheme } from "styled-components/native";
 
@@ -15,11 +15,11 @@ export default function Genre({ genre }: Props) {
     <StyledContainer>
       {genres?.map((item, idx) => {
         return (
-          <StyledCardGenre>
-            <Label color={COLORS.text.WHITE} key={idx} fontSize={16}>
+          <StyledRoundedCard key={idx + 1}>
+            <Label color={COLORS.text.WHITE} fontSize={16}>
               {item}
             </Label>
-          </StyledCardGenre>
+          </StyledRoundedCard>
         );
       })}
     </StyledContainer>

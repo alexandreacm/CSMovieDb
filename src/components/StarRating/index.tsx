@@ -2,21 +2,22 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 import Icon from "@expo/vector-icons/FontAwesome";
+import { useTheme } from "styled-components/native";
 
 type Props = {
-  average?: number;
+  average?: string | undefined;
 };
 
-// create a component
 const StarRating = ({ average }: Props) => {
+  const { COLORS } = useTheme();
   if (!average) {
     return null;
   }
 
   return (
     <View style={styles.container}>
-      <Icon testID="starIcon" name="star" color="yellow" size={25} />
-      <Text style={styles.text}>{average}</Text>
+      <Icon testID="starIcon" name="star" color={COLORS.ui.STAR} size={24} />
+      <Text style={styles.text}>{average}/10</Text>
     </View>
   );
 };
@@ -26,11 +27,13 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     flexDirection: "row",
-    marginVertical: 12,
+    alignItems: "center",
+    padding: 8,
   },
   text: {
     fontSize: 18,
     color: "#7e7a7a",
+    marginLeft: 10,
   },
 });
 
