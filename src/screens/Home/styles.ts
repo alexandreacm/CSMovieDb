@@ -44,6 +44,7 @@ const StyledRoundedView = styled.View<ViewProps>`
 const StyledWrapperError = styled.View<ViewProps>`
   width: 100%;
   padding: 10px;
+  margin-top: 10px;
   border-radius: 4px;
   opacity: 0.9;
   background-color: ${({ theme }) => theme.COLORS.ui.PRIMARY_600};
@@ -81,6 +82,21 @@ const StyledSearchInput = styled.TextInput`
   text-align: left;
 `;
 
+const StyledCard = styled.View`
+    width: 175px;
+    height: 330px;
+    padding: 10px;
+    background-color: ${({ theme }) => theme.COLORS.text.WHITE};
+    border-radius: 10px;
+`;
+
+const StyledViewEmpty = styled.View`
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    margin-top: 14px;
+`;
+
 export {
   StyledHomeContainer,
   WrapperButtons,
@@ -91,5 +107,7 @@ export {
   WrapperSearch,
   StyledInput,
   StyledIcon,
-  StyledSearchInput
+  StyledSearchInput,
+  StyledCard,
+  StyledViewEmpty
 }

@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  TouchableOpacity,
-  FlatList,
-  View,
-  Image,
-  StyleSheet,
-} from "react-native";
+import { TouchableOpacity, FlatList, Image, StyleSheet } from "react-native";
 import { Octicons } from "@expo/vector-icons";
 import { NativeStackHeaderProps } from "@react-navigation/native-stack";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -22,6 +16,8 @@ import {
   StyledInput,
   StyledIcon,
   StyledSearchInput,
+  StyledCard,
+  StyledViewEmpty,
 } from "./styles";
 import theme from "../../styles/theme/default-theme";
 import {
@@ -30,13 +26,21 @@ import {
 } from "../../services/api-movie";
 import { IMovie } from "../../models";
 import { Loading } from "../../components/Loading";
+import { useTheme } from "styled-components/native";
 
 type NavigationProps = NativeStackHeaderProps & {};
 
 export default function Home({ navigation }: NavigationProps) {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("");
-  // const { data = [], isError, isLoading, error } = useGetMoviesQuery();
+  const { COLORS } = useTheme();
+  // const {
+  //   data = [],
+  //   isError,
+  //   isLoading,
+  //   isFetching,
+  //   error,
+  // } = useGetMoviesQuery();
   const {
     data = [],
     isError,
@@ -52,16 +56,19 @@ export default function Home({ navigation }: NavigationProps) {
           navigation.navigate("MovieDetail", { id: item?.imdbID });
         }}
       >
-        <View
+        <StyledCard
           key={String(item?.imdbID)}
-          style={[styles.card, styles.shadowProp]}
+          style={[
+            styles.shadowProp,
+            { marginVertical: 6, marginHorizontal: 6 },
+          ]}
         >
           <Image style={styles.img} source={{ uri: item?.Poster }} />
           <Label fontSize={14} isBold style={{ marginTop: 10 }}>
             {item?.Title}
           </Label>
           <Label fontSize={14}>{item?.Year}</Label>
-        </View>
+        </StyledCard>
       </TouchableOpacity>
     );
   };
@@ -73,6 +80,14 @@ export default function Home({ navigation }: NavigationProps) {
 
   if (isLoading || isFetching) {
     return <Loading />;
+  }
+
+  if (isError) {
+    return (
+      <StyledWrapperError>
+        <Label fontSize={20}>{error?.error || "Newwork request failed"}</Label>
+      </StyledWrapperError>
+    );
   }
 
   return (
@@ -92,7 +107,7 @@ export default function Home({ navigation }: NavigationProps) {
           <MaterialCommunityIcons
             name="dots-grid"
             size={30}
-            color="black"
+            color={true ? COLORS.ui.PRIMARY_500 : COLORS.text.BLACK}
             style={{ marginRight: 15 }}
           />
           <Octicons name="three-bars" size={26} color="black" />
@@ -113,20 +128,19 @@ export default function Home({ navigation }: NavigationProps) {
         </StyledIcon>
       </WrapperSearch>
 
-      {isError && (
-        <StyledWrapperError>
-          <Label fontSize={20}>
-            {error?.error || "Newwork request failed"}
-          </Label>
-        </StyledWrapperError>
-      )}
-
       <FlatList
         testID="flatList"
         data={data?.Search}
         numColumns={2}
         keyExtractor={(item: IMovie) => item.imdbID}
         renderItem={renderItem}
+        ListEmptyComponent={() => {
+          return (
+            <StyledViewEmpty>
+              <Label fontSize={18}>There are no movies that matched.</Label>
+            </StyledViewEmpty>
+          );
+        }}
         showsVerticalScrollIndicator={false}
       />
     </StyledHomeContainer>
@@ -134,15 +148,6 @@ export default function Home({ navigation }: NavigationProps) {
 }
 
 const styles = StyleSheet.create({
-  card: {
-    width: 175,
-    height: 340,
-    padding: 8,
-    backgroundColor: theme.COLORS.text.WHITE,
-    borderRadius: 10,
-    marginHorizontal: 6,
-    marginVertical: 6,
-  },
   shadowProp: {
     shadowColor: "#000",
     shadowOffset: {
