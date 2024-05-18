@@ -16,14 +16,15 @@ import {
   StyledInput,
   StyledIcon,
   StyledSearchInput,
-  StyledCard,
+  StyledCardColumn,
+  StyledCardList,
   StyledViewEmpty,
+  StyledImg,
+  StyledContainerList,
+  TitleList,
 } from "./styles";
 import theme from "../../styles/theme/default-theme";
-import {
-  useGetMoviesQuery,
-  useGetMovieByTitleQuery,
-} from "../../services/api-movie";
+import { useGetMovieByTitleQuery } from "../../services/api-movie";
 import { IMovie } from "../../models";
 import { Loading } from "../../components/Loading";
 import { useTheme } from "styled-components/native";
@@ -33,6 +34,7 @@ type NavigationProps = NativeStackHeaderProps & {};
 export default function Home({ navigation }: NavigationProps) {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("");
+  const [mode, setMode] = useState(2);
   const { COLORS } = useTheme();
   // const {
   //   data = [],
@@ -56,19 +58,48 @@ export default function Home({ navigation }: NavigationProps) {
           navigation.navigate("MovieDetail", { id: item?.imdbID });
         }}
       >
-        <StyledCard
-          key={String(item?.imdbID)}
-          style={[
-            styles.shadowProp,
-            { marginVertical: 6, marginHorizontal: 6 },
-          ]}
-        >
-          <Image style={styles.img} source={{ uri: item?.Poster }} />
-          <Label fontSize={14} isBold style={{ marginTop: 10 }}>
-            {item?.Title}
-          </Label>
-          <Label fontSize={14}>{item?.Year}</Label>
-        </StyledCard>
+        {mode == 2 ? (
+          <StyledCardColumn
+            key={String(item?.imdbID)}
+            style={[
+              styles.shadowProp,
+              { marginVertical: 6, marginHorizontal: 6 },
+            ]}
+          >
+            <StyledImg
+              width="100%"
+              height={260}
+              source={{ uri: item?.Poster }}
+            />
+            <Label fontSize={14} isBold style={{ marginTop: 10 }}>
+              {item?.Title}
+            </Label>
+            <Label fontSize={14}>{item?.Year}</Label>
+          </StyledCardColumn>
+        ) : (
+          <StyledCardList key={String(item?.imdbID)}>
+            <StyledImg
+              width="100px"
+              height={140}
+              source={{ uri: item?.Poster }}
+            />
+            <StyledContainerList>
+              <TitleList>
+                <Label fontSize={14} isBold>
+                  Title:
+                </Label>{" "}
+                {item?.Title}
+              </TitleList>
+              <Label fontSize={14}>
+                {" "}
+                <Label fontSize={14} isBold>
+                  Year:
+                </Label>{" "}
+                {item?.Year}
+              </Label>
+            </StyledContainerList>
+          </StyledCardList>
+        )}
       </TouchableOpacity>
     );
   };
@@ -85,9 +116,13 @@ export default function Home({ navigation }: NavigationProps) {
   if (isError) {
     return (
       <StyledWrapperError>
-        <Label fontSize={20}>{error?.error || "Newwork request failed"}</Label>
+        <Label fontSize={20}>{error?.message}</Label>
       </StyledWrapperError>
     );
+  }
+
+  function onViewMode(mode: number) {
+    setMode(mode);
   }
 
   return (
@@ -104,13 +139,21 @@ export default function Home({ navigation }: NavigationProps) {
           </StyledRoundedView>
         </WrapperFilter>
         <WrapperViewGrid>
-          <MaterialCommunityIcons
-            name="dots-grid"
-            size={30}
-            color={true ? COLORS.ui.PRIMARY_500 : COLORS.text.BLACK}
-            style={{ marginRight: 15 }}
-          />
-          <Octicons name="three-bars" size={26} color="black" />
+          <TouchableOpacity onPress={() => onViewMode(2)}>
+            <MaterialCommunityIcons
+              name="dots-grid"
+              size={30}
+              color={mode == 2 ? COLORS.ui.PRIMARY_500 : COLORS.ui.PRIMARY}
+              style={{ marginRight: 15 }}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => onViewMode(1)}>
+            <Octicons
+              color={mode == 1 ? COLORS.ui.PRIMARY_500 : COLORS.ui.PRIMARY}
+              name="three-bars"
+              size={26}
+            />
+          </TouchableOpacity>
         </WrapperViewGrid>
       </WrapperButtons>
 
@@ -129,9 +172,10 @@ export default function Home({ navigation }: NavigationProps) {
       </WrapperSearch>
 
       <FlatList
+        key={mode}
         testID="flatList"
         data={data?.Search}
-        numColumns={2}
+        numColumns={mode}
         keyExtractor={(item: IMovie) => item.imdbID}
         renderItem={renderItem}
         ListEmptyComponent={() => {
@@ -157,9 +201,5 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.39,
     shadowRadius: 8.3,
     elevation: 5,
-  },
-  img: {
-    width: "100%",
-    height: 260,
   },
 });

@@ -1,6 +1,11 @@
 import { ViewProps } from 'react-native';
 import styled from 'styled-components/native';
 
+type ImageProp = {
+  width: string;
+  height: number;
+}
+
 const StyledHomeContainer = styled.View<ViewProps>`
   flex: 1;
   padding: 8px;
@@ -82,7 +87,14 @@ const StyledSearchInput = styled.TextInput`
   text-align: left;
 `;
 
-const StyledCard = styled.View`
+const StyledViewEmpty = styled.View`
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    margin-top: 14px;
+`;
+
+const StyledCardColumn = styled.View`
     width: 175px;
     height: 330px;
     padding: 10px;
@@ -90,11 +102,30 @@ const StyledCard = styled.View`
     border-radius: 10px;
 `;
 
-const StyledViewEmpty = styled.View`
-    flex: 1;
-    justify-content: center;
-    align-items: center;
-    margin-top: 14px;
+const StyledCardList = styled.View`
+    flex:1;
+    flex-direction: row;
+    padding: 5px;
+    margin-top: 10px;
+    border-bottom-width: 0.8px;
+    border-bottom-color: #CDCDCD;
+`;
+
+const StyledContainerList = styled.View`
+    flex:1;
+    padding: 10px;
+`;
+
+const StyledImg = styled.Image<ImageProp>`
+  width: ${({ width }) => `${width}`};
+  height: ${({ height }) => `${height}px`};
+`;
+
+const TitleList = styled.Text`
+ width: 100%;
+ margin-bottom: 4px;
+ font-size: 14px;
+ font-weight: bold;
 `;
 
 export {
@@ -108,6 +139,10 @@ export {
   StyledInput,
   StyledIcon,
   StyledSearchInput,
-  StyledCard,
-  StyledViewEmpty
+  StyledCardColumn,
+  StyledCardList,
+  StyledViewEmpty,
+  StyledImg,
+  StyledContainerList,
+  TitleList
 }

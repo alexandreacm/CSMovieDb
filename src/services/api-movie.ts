@@ -5,9 +5,6 @@ export const movieApi = createApi({
     reducerPath: 'imdb',
     baseQuery: fetchBaseQuery({ baseUrl: 'http://www.omdbapi.com/' }),
     endpoints: (builder) => ({
-        getMovies: builder.query<IResponseMovie, void>({
-            query: () => '?apikey=3dd8a625&s=hidden&page=1'
-        }),
         getMovieByTitle: builder.query<IResponseMovie, string>({
             query: (title) => `?apikey=3dd8a625&s=${title}&page=1`
         }),
@@ -18,6 +15,5 @@ export const movieApi = createApi({
 })
 
 export const {
-    useGetMoviesQuery,
     useGetMovieByTitleQuery,
     useGetMovieByIdQuery } = movieApi;
