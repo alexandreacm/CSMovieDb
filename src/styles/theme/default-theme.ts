@@ -11,13 +11,15 @@ export default {
             PRIMARY_600: '#D0421B',
             SECONDARY_900: '#FFFFFF',
             SUCCESS: '#138000',
+            STAR: '#f6c30c',
+            BORDER: '#d9d5d5'
         },
         text: {
             WHITE: '#FFFFFF',
             BLACK: '#000',
             ERROR: '#D0421B',
             SUCCESS: '#138000',
-            TITLE: "#0C8CE9",
+            TITLE: "#0e63be;",
         },
     },
     FONTS: {
