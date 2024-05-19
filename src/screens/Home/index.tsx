@@ -200,6 +200,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.39,
     shadowRadius: 8.3,
-    elevation: 5,
+    elevation: 8,
   },
 });

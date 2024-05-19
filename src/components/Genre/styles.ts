@@ -9,7 +9,7 @@ const StyledContainer = styled.View`
 
 const StyledRoundedCard = styled.View`
   flex: 1;
-  border-radius: 50%;
+  border-radius: 50px;
   border-width: 2px;
   border-color: ${({ theme }) => theme.COLORS.ui.SECONDARY};
   justify-content: center;

@@ -2,6 +2,17 @@
   "expo": {
     "name": "CSMoviesDb",
     "slug": "CSMoviesDb",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "ios": {
+      "requireFullScreen": true
+    },
+    "plugins": [
+      [
+        "expo-screen-orientation",
+        {
+          "initialOrientation": "DEFAULT"
+        }
+      ]
+    ]
   }
 }

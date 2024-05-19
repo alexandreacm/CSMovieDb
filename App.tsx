@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import * as ScreenOrientation from "expo-screen-orientation";
 import { StatusBar } from "react-native";
 import SafeAreaView from "./src/components/SafeAreaView";
 import { useGoogleFonts } from "./src/hooks/useGoogleFonts";
@@ -11,14 +12,24 @@ import { store } from "./src/store";
 export default function App() {
   const [fontsLoaded, fontError] = useGoogleFonts();
 
+  useEffect(() => {
+    async function screenOrientation() {
+      try {
+        await ScreenOrientation.lockAsync(
+          ScreenOrientation.OrientationLock.PORTRAIT_UP
+        );
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    screenOrientation();
+  }, []);
+
   if (!fontsLoaded && !fontError) return null;
 
   return (
     <>
-      <StatusBar
-        barStyle="dark-content"
-        backgroundColor={theme.COLORS.ui.PRIMARY}
-      />
+      <StatusBar barStyle="default" backgroundColor={theme.COLORS.ui.PRIMARY} />
       <SafeAreaView>
         <ThemeProvider>
           <Provider store={store}>

@@ -1,5 +1,7 @@
-import { ViewProps } from 'react-native';
+import { ViewProps, Platform } from 'react-native';
 import styled from 'styled-components/native';
+
+const isAndroidWidth = Platform.OS == 'android' ? 160 : 175;
 
 type ImageProp = {
   width: string;
@@ -95,7 +97,7 @@ const StyledViewEmpty = styled.View`
 `;
 
 const StyledCardColumn = styled.View`
-    width: 175px;
+    width: ${({ theme }) => `${isAndroidWidth}px`};
     height: 330px;
     padding: 10px;
     background-color: ${({ theme }) => theme.COLORS.text.WHITE};
