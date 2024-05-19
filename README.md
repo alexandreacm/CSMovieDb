@@ -38,22 +38,18 @@ An example of Mobile Application using open API movie database.
 
 ## Running the project
 
-### Run Expo
-
-**Install dependencies**
+### Run Expo Environment
 
 ```
-npx / yarn start
+npx expo start / yarn start
 ```
-
-**Install IOS Pods**
 
 ### Run Native Development
 
 **Install dependencies**
 
 ```
-yarn
+npm / yarn
 ```
 
 **Install IOS Pods**
